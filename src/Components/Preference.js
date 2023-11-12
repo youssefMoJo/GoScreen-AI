@@ -1,7 +1,7 @@
 import "../Styles/GlowingBtn.css";
 import { useState } from "react";
 
-const References = () => {
+const Preference = () => {
   const [moviesClicked, setMoviesClicked] = useState(false);
   const [tvShowsClicked, setTvShowsClicked] = useState(false);
 
@@ -59,4 +59,4 @@ const References = () => {
   );
 };
 
-export default References;
+export default Preference;

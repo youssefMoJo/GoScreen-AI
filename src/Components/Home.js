@@ -1,5 +1,5 @@
 import Title from "./Title";
-import References from "./References";
+import Preference from "./Preference";
 
 const Home = () => {
   const homeStyle = {
@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <div style={homeStyle}>
       <Title />
-      <References />
+      <Preference />
     </div>
   );
 };
