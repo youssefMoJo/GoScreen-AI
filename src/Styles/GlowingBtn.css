@@ -10,21 +10,6 @@
   box-sizing: border-box;
 }
 
-/* html,
-body {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-
-body {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: black;
-} */
-
 .glowing-btn {
   width: fit-content;
   height: 2rem;
@@ -73,7 +58,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  opacity: 0.7;
+  opacity: 0;
   filter: blur(1em);
   transform: translateY(120%) rotateX(95deg) scale(1, 0.35);
   background: var(--glow-color);
@@ -93,6 +78,29 @@ body {
   box-shadow: 0 0 2em 0.2em var(--glow-color);
   transition: opacity 100ms linear;
 }
+/*========================================================================== */
+
+.glowing-btn.clicked {
+  background-color: hsl(186 100% 69%);
+  color: black;
+  box-shadow: 0 0 2em 0.2em var(--glow-color);
+  animation: none;
+}
+
+.glowing-btn.clicked .glowing-txt {
+  animation: none;
+}
+
+.glowing-btn.clicked:before {
+  filter: blur(1.5em);
+  opacity: 1;
+}
+
+/* .glowing-btn.clicked:after {
+  opacity: 1;
+} */
+
+/*========================================================================== */
 
 .glowing-btn:hover {
   color: rgba(0, 0, 0, 0.8);

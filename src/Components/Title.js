@@ -12,7 +12,7 @@ const Title = () => {
   };
 
   const titleSectionContainer = {
-    marginBottom: "15px",
+    marginBottom: "45px",
   };
 
   return (
