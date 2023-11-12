@@ -1,10 +1,14 @@
 import "../Styles/GlowingBtn.css";
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setPreference } from "../redux/slices/preferenceSlice";
 
 const Preference = () => {
-  const [moviesClicked, setMoviesClicked] = useState(false);
-  const [tvShowsClicked, setTvShowsClicked] = useState(false);
+  const userPreference = useSelector(
+    (state) => state.userPreference.preference
+  );
 
+  const dispatch = useDispatch();
+  console.log(userPreference);
   const referencrsSectionContainer = {
     textAlign: "center",
     display: "flex",
@@ -25,13 +29,11 @@ const Preference = () => {
   };
 
   const handleMoviesClick = () => {
-    setMoviesClicked(true);
-    setTvShowsClicked(false);
+    dispatch(setPreference("Movies"));
   };
 
   const handleTvShowsClick = () => {
-    setMoviesClicked(false);
-    setTvShowsClicked(true);
+    dispatch(setPreference("Tv Shows"));
   };
 
   return (
@@ -39,15 +41,20 @@ const Preference = () => {
       <div style={referencrsTile}>What are you in the mood for?</div>
       <div style={glowingBtnsContainer}>
         <div
-          className={`glowing-btn ${moviesClicked ? "clicked" : ""}`}
+          className={`glowing-btn ${
+            userPreference === "Movies" ? "clicked" : ""
+          }`}
           onClick={handleMoviesClick}
         >
           <span className="glowing-txt">
             M<span className="faulty-letter">O</span>VIES
           </span>
         </div>
+
         <div
-          className={`glowing-btn ${tvShowsClicked ? "clicked" : ""}`}
+          className={`glowing-btn ${
+            userPreference === "Tv Shows" ? "clicked" : ""
+          }`}
           onClick={handleTvShowsClick}
         >
           <span className="glowing-txt">
