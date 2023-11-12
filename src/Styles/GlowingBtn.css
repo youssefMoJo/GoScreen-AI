@@ -10,7 +10,7 @@
   box-sizing: border-box;
 }
 
-html,
+/* html,
 body {
   height: 100%;
   width: 100%;
@@ -23,7 +23,7 @@ body {
   justify-content: center;
   align-items: center;
   background: black;
-}
+} */
 
 .glowing-btn {
   width: fit-content;
@@ -40,7 +40,7 @@ body {
   font-size: 1em;
   font-weight: 900;
   letter-spacing: 1em;
-  
+
   -webkit-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
     0px 0px 0.5em 0px var(--glow-color);
   -moz-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
@@ -218,7 +218,7 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
-  .glowing-btn{
+  .glowing-btn {
     font-size: 1em;
   }
 }
