@@ -1,4 +1,5 @@
 import Title  from "./Title"
+import References from "./References"
 
 const Home = () => {
     const homeStyle = {
@@ -10,6 +11,7 @@ const Home = () => {
     return (
         <div style={homeStyle}>
             <Title/>
+            {/* <References/> */}
         </div>
     )
 }

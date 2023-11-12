@@ -12,8 +12,12 @@ const Title = () => {
         fontSize: "18px",
     }
 
+    const titleSectionContainer = {
+        marginBottom: '15px',
+    }
+
     return (
-        <div>
+        <div style={titleSectionContainer}>
             <div style={titleStyle}>Welcome to Movies & TV Shows Recommender</div>
             <span style={aiPowered}>AI-Powered</span>
         </div>
