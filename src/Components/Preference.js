@@ -8,7 +8,7 @@ const Preference = () => {
   );
 
   const dispatch = useDispatch();
-  console.log(userPreference);
+  
   const referencrsSectionContainer = {
     textAlign: "center",
     display: "flex",
