@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Lottie from "lottie-react";
 import aiAnimation from "../assets/AI.json";
+import { setUserInput } from "../redux/slices/userInputSlice";
 
 const InputSec = () => {
   const [animationStarted, setAnimationStarted] = useState(false);
@@ -10,6 +11,8 @@ const InputSec = () => {
   const userPreference = useSelector(
     (state) => state.userPreference.preference
   );
+
+  const dispatch = useDispatch();
 
   const inputSectionContainerStyle = {
     display: "flex",
@@ -63,6 +66,10 @@ const InputSec = () => {
     }
   };
 
+  const handleInputChange = (event) => {
+    dispatch(setUserInput(event.target.value));
+  };
+
   return (
     <div style={inputSectionContainerStyle}>
       <div style={aiAnimationStyle}>
@@ -80,6 +87,7 @@ const InputSec = () => {
         style={textAreaStyle}
         onFocus={handleTextAreaFocus}
         onBlur={handleTextAreaBlur}
+        onChange={handleInputChange}
       ></textarea>
     </div>
   );
