@@ -8,22 +8,22 @@ const Preference = () => {
   );
 
   const dispatch = useDispatch();
-  
-  const referencrsSectionContainer = {
-    textAlign: "center",
+
+  const referencrsSectionContainerStyle = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    marginBottom: "45px",
   };
 
-  const referencrsTile = {
+  const referencrsTileStyle = {
     fontFamily: "'Press Start 2P', sans-serif",
     color: "#09F0FF",
     marginBottom: "40px",
     fontSize: "18px",
   };
 
-  const glowingBtnsContainer = {
+  const glowingBtnsContainerStyle = {
     display: "flex",
     gap: "80px",
   };
@@ -37,9 +37,9 @@ const Preference = () => {
   };
 
   return (
-    <div style={referencrsSectionContainer}>
-      <div style={referencrsTile}>What are you in the mood for?</div>
-      <div style={glowingBtnsContainer}>
+    <div style={referencrsSectionContainerStyle}>
+      <div style={referencrsTileStyle}>What are you in the mood for?</div>
+      <div style={glowingBtnsContainerStyle}>
         <div
           className={`glowing-btn ${
             userPreference === "Movies" ? "clicked" : ""

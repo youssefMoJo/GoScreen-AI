@@ -5,20 +5,20 @@ const Title = () => {
     color: "white",
     marginBottom: "13px",
   };
-  const aiPowered = {
+  const aiPoweredStyle = {
     fontFamily: "'Press Start 2P', sans-serif",
     color: "#53FC38",
     fontSize: "18px",
   };
 
-  const titleSectionContainer = {
+  const titleSectionContainerStyle = {
     marginBottom: "45px",
   };
 
   return (
-    <div style={titleSectionContainer}>
+    <div style={titleSectionContainerStyle}>
       <div style={titleStyle}>Welcome to Movies & TV Shows Recommender</div>
-      <span style={aiPowered}>AI-Powered</span>
+      <span style={aiPoweredStyle}>AI-Powered</span>
     </div>
   );
 };
