@@ -1,10 +1,9 @@
 import React from "react";
-import Lottie from "lottie-react";
 
 import Title from "./Title";
 import Preference from "./Preference";
 import InputSec from "./InputSec";
-import smallRobot from "../assets/smallRobot.json";
+import SmallRobot from "./SmallRobot";
 
 const Home = () => {
   const homeStyle = {
@@ -13,21 +12,12 @@ const Home = () => {
     padding: "6vh",
   };
 
-  const smallRobotStyle = {
-    width: "13%",
-    position: "absolute",
-    right: "0",
-    bottom: "0px",
-  };
-
   return (
     <div style={homeStyle}>
       <Title />
       <Preference />
       <InputSec />
-      <div style={smallRobotStyle}>
-        <Lottie loop={true} animationData={smallRobot} />
-      </div>
+      <SmallRobot />
     </div>
   );
 };

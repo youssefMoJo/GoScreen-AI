@@ -37,7 +37,7 @@ const InputSec = () => {
     width: "13%",
     position: "absolute",
     marginRight: "25%",
-    left: animationStarted & !animationGoBackStarted ? "22%" : "26%",
+    left: animationStarted & !animationGoBackStarted ? "22%" : "27.5%",
     transition: "left 0.5s ease-in-out",
   };
 
@@ -76,7 +76,7 @@ const InputSec = () => {
         {animationStarted ? (
           <Lottie
             lottieRef={aiAnimationRef}
-            loop={false}
+            loop={true}
             animationData={aiAnimation}
           />
         ) : null}
