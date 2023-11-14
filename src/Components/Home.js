@@ -1,6 +1,8 @@
 import Title from "./Title";
 import Preference from "./Preference";
 
+import InputSec from "./InputSec"
+
 const Home = () => {
   const homeStyle = {
     minHeight: "100vh",
@@ -12,6 +14,8 @@ const Home = () => {
     <div style={homeStyle}>
       <Title />
       <Preference />
+      <InputSec/>
+      
     </div>
   );
 };
