@@ -4,6 +4,7 @@ import Title from "./Title";
 import Preference from "./Preference";
 import InputSec from "./InputSec";
 import SmallRobot from "./SmallRobot";
+import GetRecommendationsBtn from "./GetRecommendationsBtn";
 
 const Home = () => {
   const homeStyle = {
@@ -18,6 +19,7 @@ const Home = () => {
       <Preference />
       <InputSec />
       <SmallRobot />
+      <GetRecommendationsBtn />
     </div>
   );
 };

@@ -30,10 +30,16 @@ const SmallRobot = () => {
   return (
     <div>
       <div style={smallRobotStyle}>
-        <Lottie loop={true} animationData={smallRobot} />
+        <Lottie
+          loop={isAnimationReady > 0 ? true : false}
+          animationData={smallRobot}
+        />
       </div>
       <div style={smallRobotBGStyle}>
-        <Lottie loop={true} animationData={robotBG} />
+        <Lottie
+          loop={isAnimationReady > 0 ? true : false}
+          animationData={robotBG}
+        />
       </div>
     </div>
   );
