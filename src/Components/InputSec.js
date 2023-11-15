@@ -6,7 +6,6 @@ import { setUserInput } from "../redux/slices/userInputSlice";
 
 const InputSec = () => {
   const [animationStarted, setAnimationStarted] = useState(false);
-  const [animationGoBackStarted, setanimationGoBackStarted] = useState(false);
   const aiAnimationRef = useRef();
   const userPreference = useSelector(
     (state) => state.userPreference.preference
@@ -37,9 +36,6 @@ const InputSec = () => {
     width: "13%",
     position: "absolute",
     marginRight: "55%",
-    // left: animationStarted & !animationGoBackStarted ? "22%" : "27.5%",
-    // transition: "left 0.5s ease-in-out",
-
     left: animationStarted ? "22%" : "27.5%",
     opacity: animationStarted ? 1 : 0,
     transform: `scale(${animationStarted ? 1 : 0})`,
@@ -50,15 +46,11 @@ const InputSec = () => {
   const handleTextAreaFocus = () => {
     if (!animationStarted) {
       setAnimationStarted(true);
-      // setTimeout(() => {
-      //   setanimationGoBackStarted(true);
-      // }, 3000);
     }
   };
 
   const handleTextAreaBlur = () => {
     setAnimationStarted(false);
-    // setanimationGoBackStarted(false);
   };
 
   const getPlaceholderText = () => {
@@ -85,17 +77,6 @@ const InputSec = () => {
           animationData={aiAnimation}
         />
       </div>
-
-      {/* <div style={aiAnimationStyle}>
-        {animationStarted ? (
-          <Lottie
-            lottieRef={aiAnimationRef}
-            loop={true}
-            animationData={aiAnimation}
-          />
-        ) : null}
-      </div> */}
-
       <textarea
         placeholder={getPlaceholderText()}
         style={textAreaStyle}
