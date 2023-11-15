@@ -36,23 +36,29 @@ const InputSec = () => {
   const aiAnimationStyle = {
     width: "13%",
     position: "absolute",
-    marginRight: "25%",
-    left: animationStarted & !animationGoBackStarted ? "22%" : "27.5%",
-    transition: "left 0.5s ease-in-out",
+    marginRight: "55%",
+    // left: animationStarted & !animationGoBackStarted ? "22%" : "27.5%",
+    // transition: "left 0.5s ease-in-out",
+
+    left: animationStarted ? "22%" : "27.5%",
+    opacity: animationStarted ? 1 : 0,
+    transform: `scale(${animationStarted ? 1 : 0})`,
+    transition:
+      "opacity 0.4s ease-in-out, transform 0.4s ease-in-out, left 0.5s ease-in-out",
   };
 
   const handleTextAreaFocus = () => {
     if (!animationStarted) {
       setAnimationStarted(true);
-      setTimeout(() => {
-        setanimationGoBackStarted(true);
-      }, 3000);
+      // setTimeout(() => {
+      //   setanimationGoBackStarted(true);
+      // }, 3000);
     }
   };
 
   const handleTextAreaBlur = () => {
     setAnimationStarted(false);
-    setanimationGoBackStarted(false);
+    // setanimationGoBackStarted(false);
   };
 
   const getPlaceholderText = () => {
@@ -73,6 +79,14 @@ const InputSec = () => {
   return (
     <div style={inputSectionContainerStyle}>
       <div style={aiAnimationStyle}>
+        <Lottie
+          lottieRef={aiAnimationRef}
+          loop={animationStarted ? true : false}
+          animationData={aiAnimation}
+        />
+      </div>
+
+      {/* <div style={aiAnimationStyle}>
         {animationStarted ? (
           <Lottie
             lottieRef={aiAnimationRef}
@@ -80,7 +94,7 @@ const InputSec = () => {
             animationData={aiAnimation}
           />
         ) : null}
-      </div>
+      </div> */}
 
       <textarea
         placeholder={getPlaceholderText()}
