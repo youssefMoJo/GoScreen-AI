@@ -18,6 +18,7 @@ const InputSec = () => {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    marginBottom: "45px",
   };
 
   const textAreaStyle = {
