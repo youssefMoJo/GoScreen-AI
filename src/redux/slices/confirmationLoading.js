@@ -1,20 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  confirmationLoadingStatus: false,
+  isConfirmationLoadingFinished: false,
 };
 
-export const confirmationLoadingSlice = createSlice({
-  name: "confirmationLoadingStatus",
+export const isConfirmationLoadingFinishedSlice = createSlice({
+  name: "isConfirmationLoadingFinished",
   initialState,
   reducers: {
-    setConfirmationLoadingStatus: (state, action) => {
-      state.confirmationLoadingStatus = action.payload;
+    setIsConfirmationLoadingStatus: (state, action) => {
+      state.isConfirmationLoadingFinished = action.payload;
     },
   },
 });
 
-export const { setConfirmationLoadingStatus } =
-  confirmationLoadingSlice.actions;
+export const { setIsConfirmationLoadingStatus } =
+  isConfirmationLoadingFinishedSlice.actions;
 
-export default confirmationLoadingSlice.reducer;
+export default isConfirmationLoadingFinishedSlice.reducer;
