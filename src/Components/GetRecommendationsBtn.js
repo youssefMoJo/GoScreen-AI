@@ -1,6 +1,7 @@
 import "../Styles/GetRecommendationsBtn.css";
 import { useSelector, useDispatch } from "react-redux";
 import { setGetRecommendationsStatus } from "../redux/slices/getRecommendationsStatus";
+import { setIsConfirmationLoadingFinished } from "../redux/slices/confirmationLoading";
 
 const GetRecommendationsBtn = () => {
   const userPreference = useSelector(
@@ -20,9 +21,11 @@ const GetRecommendationsBtn = () => {
 
   const handleConfirmation = () => {
     dispatch(setGetRecommendationsStatus(true));
+    dispatch(setIsConfirmationLoadingFinished(false));
 
     setTimeout(() => {
       dispatch(setGetRecommendationsStatus(false));
+      dispatch(setIsConfirmationLoadingFinished(true));
     }, 4500);
   };
 

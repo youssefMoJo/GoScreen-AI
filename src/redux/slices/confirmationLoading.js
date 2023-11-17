@@ -8,13 +8,13 @@ export const isConfirmationLoadingFinishedSlice = createSlice({
   name: "isConfirmationLoadingFinished",
   initialState,
   reducers: {
-    setIsConfirmationLoadingStatus: (state, action) => {
+    setIsConfirmationLoadingFinished: (state, action) => {
       state.isConfirmationLoadingFinished = action.payload;
     },
   },
 });
 
-export const { setIsConfirmationLoadingStatus } =
+export const { setIsConfirmationLoadingFinished } =
   isConfirmationLoadingFinishedSlice.actions;
 
 export default isConfirmationLoadingFinishedSlice.reducer;
