@@ -1,3 +1,22 @@
 .App {
   /* padding: 1rem; */
 }
+/* Change the color of the scrollbar track */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #aaa8a8;
+}
+
+/* Change the color and style of the scrollbar handle */
+::-webkit-scrollbar-thumb {
+  background-color: rgb(24, 51, 110);
+  border-radius: 6px;
+}
+
+/* Change the color of the scrollbar buttons (arrows) */
+::-webkit-scrollbar-button {
+  background-color: #5c5757;
+}
