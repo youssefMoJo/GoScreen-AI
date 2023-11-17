@@ -111,7 +111,7 @@ const InputSec = () => {
   };
 
   const comingSoonStyle = {
-    width: "20%",
+    width: "25%",
     position: "absolute",
     opacity: userPreference === "Tv Shows" ? 1 : 0,
     transform: `scale(${userPreference === "Tv Shows" ? 1 : 0})`,
