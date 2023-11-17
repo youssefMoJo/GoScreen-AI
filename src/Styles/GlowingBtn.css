@@ -52,7 +52,7 @@
 }
 
 .glowing-btn::before {
-  content: "";
+  /* content: "";
   position: absolute;
   top: 0;
   bottom: 0;
@@ -62,7 +62,7 @@
   filter: blur(1em);
   transform: translateY(120%) rotateX(95deg) scale(1, 0.35);
   background: var(--glow-color);
-  pointer-events: none;
+  pointer-events: none; */
 }
 
 .glowing-btn::after {
