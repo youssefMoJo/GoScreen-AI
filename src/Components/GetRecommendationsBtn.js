@@ -16,7 +16,7 @@ const GetRecommendationsBtn = () => {
   const GetRecommendationsBtnStyle = {
     textAlign: "center",
   };
-  let isButtonDisabled = !(userPreference.length > 0 && userInput.length > 0);
+  let isButtonDisabled = !(userPreference === "Movies" && userInput.length > 0);
 
   const handleConfirmation = () => {
     dispatch(setGetRecommendationsStatus(true));

@@ -5,6 +5,7 @@ import aiAnimation from "../assets/AI.json";
 import { setUserInput } from "../redux/slices/userInputSlice";
 import robotScaningBrain from "../assets/robotScaningBrain1.json";
 import bgBehindScaning from "../assets/bgBehindScaning.json";
+import comingSoon from "../assets/comingSoon1.json";
 
 const InputSec = () => {
   const [animationStarted, setAnimationStarted] = useState(false);
@@ -46,9 +47,19 @@ const InputSec = () => {
     width: "13%",
     position: "absolute",
     marginRight: "55%",
-    left: animationStarted & !recommendationsStatus ? "22%" : "27.5%",
-    opacity: animationStarted & !recommendationsStatus ? 1 : 0,
-    transform: `scale(${animationStarted & !recommendationsStatus ? 1 : 0})`,
+    left:
+      animationStarted & !recommendationsStatus && userPreference !== "Tv Shows"
+        ? "22%"
+        : "27.5%",
+    opacity:
+      animationStarted & !recommendationsStatus && userPreference !== "Tv Shows"
+        ? 1
+        : 0,
+    transform: `scale(${
+      animationStarted & !recommendationsStatus && userPreference !== "Tv Shows"
+        ? 1
+        : 0
+    })`,
     transition:
       "opacity 0.4s ease-in-out, transform 0.4s ease-in-out, left 0.5s ease-in-out",
   };
@@ -70,7 +81,8 @@ const InputSec = () => {
       case "Movies":
         return "Tell us about the Movie you want to watch...";
       case "Tv Shows":
-        return "Tell us about the Tv Show you want to watch...";
+        // return "Tell us about the Tv Show you want to watch...";
+        return "";
       default:
         return "Please select your preference: Movies or TV Shows";
     }
@@ -95,8 +107,15 @@ const InputSec = () => {
     position: "absolute",
     opacity: recommendationsStatus ? 1 : 0,
     transform: `scale(${recommendationsStatus ? 1 : 0})`,
-    transition:
-      "opacity 0.4s ease-in-out, transform 0.4s ease-in-out, left 0.5s ease-in-out",
+    transition: "opacity 0.4s ease-in-out, transform 0.4s ease-in-out",
+  };
+
+  const comingSoonStyle = {
+    width: "20%",
+    position: "absolute",
+    opacity: userPreference === "Tv Shows" ? 1 : 0,
+    transform: `scale(${userPreference === "Tv Shows" ? 1 : 0})`,
+    transition: "opacity 0.4s ease-in-out, transform 0.4s ease-in-out",
   };
 
   return (
@@ -115,17 +134,28 @@ const InputSec = () => {
         onFocus={handleTextAreaFocus}
         onBlur={handleTextAreaBlur}
         onChange={handleInputChange}
-        value={recommendationsStatus ? "" : userInput}
-        disabled={recommendationsStatus ? true : false}
+        value={
+          recommendationsStatus || userPreference === "Tv Shows"
+            ? ""
+            : userInput
+        }
+        disabled={
+          recommendationsStatus || userPreference === "Tv Shows" ? true : false
+        }
       ></textarea>
       <Lottie
+        style={comingSoonStyle}
+        loop={userPreference === "Tv Shows" ? false : true}
+        animationData={comingSoon}
+      />
+      <Lottie
         style={bgBehindScaningStyle}
-        loop={true}
+        loop={recommendationsStatus ? true : false}
         animationData={bgBehindScaning}
       />
       <Lottie
         style={robotScaningBrainStyle}
-        loop={true}
+        loop={recommendationsStatus ? true : false}
         animationData={robotScaningBrain}
       />
     </div>
