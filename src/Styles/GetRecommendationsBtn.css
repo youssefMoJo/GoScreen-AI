@@ -67,7 +67,8 @@
 
 .button:hover::before,
 .button:focus::before {
-  opacity: 0.2;
+  /* this is responsible for the shadow beneath the button when hovering */
+  opacity: 0;
   transform: perspective(1em) rotateX(40deg) scale(1.5, 0.6);
   transition: transform 0.2s linear;
 }
