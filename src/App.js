@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 
 import "./App.css";
 import Home from "./Components/Home";
-import Movies from "./Components/Movies";
+import MoviesPage from "./Components/MoviesPage";
 import { useSelector } from "react-redux";
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
       <Home />
       {isConfirmationLoadingFinished ? (
         <div ref={moviesRef}>
-          <Movies />
+          <MoviesPage />
         </div>
       ) : null}
     </div>
