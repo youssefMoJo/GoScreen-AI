@@ -16,7 +16,7 @@ const Movies = () => {
     transition: "background 0.5s ease",
     color: "white",
     overflow: "hidden",
-    padding: "6vh",
+    // padding: "6vh",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -24,8 +24,8 @@ const Movies = () => {
 
   const animationWrapperStyle = {
     position: "absolute",
-    top: animationFinished ? "4vh" : "50%",
-    left: animationFinished ? "4vh" : "50%",
+    top: animationFinished ? "1vh" : "50%",
+    left: animationFinished ? "1vh" : "50%",
     transform: animationFinished
       ? "scale(0.5) translate(-50%, -50%)"
       : "translate(-50%, -50%)",
@@ -47,6 +47,7 @@ const Movies = () => {
           onComplete={handleAnimationFinish}
         />
       </div>
+      <div style={{ backgroundColor: "black" }}>hello</div>
     </div>
   );
 };
