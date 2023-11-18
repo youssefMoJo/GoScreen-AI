@@ -24,8 +24,8 @@ const Movies = () => {
 
   const animationWrapperStyle = {
     position: "absolute",
-    top: animationFinished ? "1vh" : "50%",
-    left: animationFinished ? "1vh" : "50%",
+    top: animationFinished ? "0vh" : "50%",
+    left: animationFinished ? "0vh" : "50%",
     transform: animationFinished
       ? "scale(0.5) translate(-50%, -50%)"
       : "translate(-50%, -50%)",
@@ -37,8 +37,18 @@ const Movies = () => {
     transition: "width 0.5s ease-in-out",
   };
 
+  const navBarStyle = {
+    position: "absolute",
+    top: 0,
+    background: "black",
+    width: "100%",
+    height: "7%",
+    opacity: "0.3",
+  };
+
   return (
     <div style={moviesContainerStyle}>
+      <div style={navBarStyle}></div>
       <div style={animationWrapperStyle}>
         <Lottie
           style={moviesAnimationStyle}
@@ -47,7 +57,6 @@ const Movies = () => {
           onComplete={handleAnimationFinish}
         />
       </div>
-      <div style={{ backgroundColor: "black" }}>hello</div>
     </div>
   );
 };
