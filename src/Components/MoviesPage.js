@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Lottie from "lottie-react";
 import moviesAnimation from "../assets/moviesAnimation.json";
+import MoviesCircles from "./MoviesCircles";
 
 const Movies = () => {
   const [animationFinished, setAnimationFinished] = useState(false);
@@ -57,6 +58,7 @@ const Movies = () => {
           onComplete={handleAnimationFinish}
         />
       </div>
+      {animationFinished && <MoviesCircles />}
     </div>
   );
 };
