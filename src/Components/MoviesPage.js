@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Lottie from "lottie-react";
 import moviesAnimation from "../assets/moviesAnimation.json";
 import MoviesCircles from "./MoviesCircles";
+import EachMovie from "./EachMovie";
 
 const Movies = () => {
   const [animationFinished, setAnimationFinished] = useState(false);
@@ -18,9 +19,9 @@ const Movies = () => {
     color: "white",
     overflow: "hidden",
     // padding: "6vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    // display: "flex",
+    // alignItems: "center",
+    // justifyContent: "center",
   };
 
   const animationWrapperStyle = {
@@ -44,12 +45,14 @@ const Movies = () => {
     background: "black",
     width: "100%",
     height: "7%",
-    opacity: "0.3",
+    opacity: "0.2",
   };
 
   return (
     <div style={moviesContainerStyle}>
+      {animationFinished && <EachMovie />}
       <div style={navBarStyle}></div>
+
       <div style={animationWrapperStyle}>
         <Lottie
           style={moviesAnimationStyle}
