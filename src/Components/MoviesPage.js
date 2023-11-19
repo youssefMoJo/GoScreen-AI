@@ -42,15 +42,17 @@ const Movies = () => {
   const navBarStyle = {
     position: "absolute",
     top: 0,
-    background: "black",
+    // background: "black",
+    background: "linear-gradient(to top, transparent, black)",
     width: "100%",
     height: "7%",
-    opacity: "0.2",
+    opacity: "0.6",
   };
 
   return (
     <div style={moviesContainerStyle}>
       {animationFinished && <EachMovie />}
+
       <div style={navBarStyle}></div>
 
       <div style={animationWrapperStyle}>
@@ -61,6 +63,7 @@ const Movies = () => {
           onComplete={handleAnimationFinish}
         />
       </div>
+
       {animationFinished && <MoviesCircles />}
     </div>
   );

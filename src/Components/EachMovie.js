@@ -1,4 +1,5 @@
 import coverImage from "../assets/cover.png";
+import MoviePoster from "./MoviePoster";
 
 const EachMovie = () => {
   const eachMovieStyle = {
@@ -26,6 +27,8 @@ const EachMovie = () => {
     <div style={eachMovieStyle}>
       <img src={coverImage} style={coverImageStyle} />
       <div style={coverImageBlackLayerStyle}></div>
+
+      <MoviePoster />
     </div>
   );
 };
