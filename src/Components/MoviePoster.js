@@ -10,7 +10,7 @@ const MoviePoster = () => {
   };
 
   return (
-    <div style={moviePoterStyle}>
+    <div>
       <img src={poster} style={moviePoterStyle} />
     </div>
   );
