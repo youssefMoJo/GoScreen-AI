@@ -1,12 +1,33 @@
+import React, { useEffect, useState } from "react";
 import imdbIcon from "../assets/imdb.png";
 import rottenTomatoesIcon from "../assets/rottenTomatoes.png";
 
 const MovieInfo = () => {
+  const [animationFinished, setAnimationFinished] = useState(false);
+
+  useEffect(() => {
+    // Delay the animation by 1000 milliseconds (1 second)
+    const delay = 500;
+
+    // Trigger animation after the specified delay
+    const timeoutId = setTimeout(() => {
+      setAnimationFinished(true);
+    }, delay);
+
+    // Clear the timeout when the component unmounts to avoid memory leaks
+    return () => clearTimeout(timeoutId);
+  }, []);
+
   const movieInfoStyle = {
     // backgroundColor: "green",
     width: "60%",
     marginTop: "-6rem",
     zIndex: "1",
+    opacity: animationFinished ? 1 : 0,
+    transform: animationFinished
+      ? "translateX(0) scale(1)"
+      : "translateX(-50px) scale(0)",
+    transition: "opacity 0.5s ease-in-out, transform 0.5s ease-in-out",
   };
 
   const movieNameStyle = {
