@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import poster from "../assets/poster.jpg";
+import MovieTrailer from "./MovieTrailer";
 
 const MoviePoster = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -22,7 +23,7 @@ const MoviePoster = () => {
 
   const moviePosterStyle = {
     height: "21rem",
-    width: "14rem",
+    // width: "14rem",
     borderRadius: "4%",
     // position: "absolute",
     // top: "35%",
@@ -36,6 +37,7 @@ const MoviePoster = () => {
   return (
     <div style={posterContainerStyle}>
       <img src={poster} style={moviePosterStyle} alt="Movie Poster" />
+      <MovieTrailer />
     </div>
   );
 };
