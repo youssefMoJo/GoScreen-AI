@@ -16,19 +16,25 @@ const MoviePoster = () => {
     animateCard();
   }, []);
 
+  const posterContainerStyle = {
+    width: "16rem",
+  };
+
   const moviePosterStyle = {
     height: "21rem",
+    width: "14rem",
     borderRadius: "4%",
-    position: "absolute",
-    top: "35%",
-    left: "10%",
+    // position: "absolute",
+    // top: "35%",
+    // left: "10%",
+    marginTop: "-10rem",
     opacity: isLoaded ? 1 : 0,
     transform: isLoaded ? "scale(1) rotate(0deg)" : "scale(0.8) rotate(-15deg)",
     transition: "opacity 0.4s ease-in-out, transform 0.4s ease-in-out",
   };
 
   return (
-    <div>
+    <div style={posterContainerStyle}>
       <img src={poster} style={moviePosterStyle} alt="Movie Poster" />
     </div>
   );

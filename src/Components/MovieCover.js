@@ -38,10 +38,9 @@ const MovieCover = () => {
     left: 0,
     width: "100%",
     height: "100%",
-    opacity: "0.5",
     background: "linear-gradient(to top, #003157, transparent)",
     transition: "opacity 0.3s ease-in-out", // Transition property for opacity
-    opacity: isLoaded ? 1 : 0, // Initial opacity set to 0
+    opacity: isLoaded ? 0.7 : 0, // Initial opacity set to 0
   };
 
   return (
