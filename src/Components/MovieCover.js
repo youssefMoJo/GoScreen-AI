@@ -9,7 +9,7 @@ const MovieCover = () => {
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     const animateCover = async () => {
-      await delay(500); // Adjust the delay as needed
+      await delay(400); // Adjust the delay as needed
 
       // Set the isLoaded state to trigger the transition
       setIsLoaded(true);
