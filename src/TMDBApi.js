@@ -26,7 +26,6 @@ class TMDBApi {
         .get(url)
         .then((res) => {
           return res.data.cast.splice(0, 5);
-          //   console.log(res.data.cast.splice(0, 5));
         })
         .catch((err) => {
           return err;
