@@ -3,11 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { setGetRecommendationsStatus } from "../redux/slices/getRecommendationsStatus";
 import { setIsConfirmationLoadingFinished } from "../redux/slices/confirmationLoading";
 import TMDBApi from "../TMDBApi";
+import { setMovies } from "../redux/slices/movies";
 
 const GetRecommendationsBtn = () => {
   const userPreference = useSelector(
     (state) => state.userPreference.preference
   );
+
   const userInput = useSelector((state) => state.userInput.userInput);
   const recommendationsStatus = useSelector(
     (state) => state.getRecommendationsStatus.getRecommendationsStatus
@@ -31,13 +33,14 @@ const GetRecommendationsBtn = () => {
     dispatch(setIsConfirmationLoadingFinished(false));
 
     let movies = ["The Shawshank Redemption", "The Godfather", "Inception"];
-    // let movies = ["The Shawshank Redemption"];
-    let result = await TMDBApi.startTMDBApi(movies);
-    console.log(result);
-    if (result) {
+    let allMovies = await TMDBApi.startTMDBApi(movies);
+    dispatch(setMovies(allMovies));
+
+    if (allMovies) {
       dispatch(setGetRecommendationsStatus(false));
       dispatch(setIsConfirmationLoadingFinished(true));
     }
+
     // setTimeout(() => {
     //   dispatch(setGetRecommendationsStatus(false));
     //   dispatch(setIsConfirmationLoadingFinished(true));

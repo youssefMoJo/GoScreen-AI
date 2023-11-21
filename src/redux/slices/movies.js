@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  movies: null,
+  movies: [],
 };
 
 export const moviesSlice = createSlice({
-  name: "movies",
+  name: "moviesReducer",
   initialState,
   reducers: {
     setMovies: (state, action) => {
