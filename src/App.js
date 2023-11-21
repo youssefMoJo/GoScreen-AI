@@ -14,7 +14,8 @@ function App() {
   const moviesRef = useRef(null);
 
   async function someFunction() {
-    let movies = ["The Shawshank Redemption", "The Godfather", "Inception"];
+    // let movies = ["The Shawshank Redemption", "The Godfather", "Inception"];
+    let movies = ["The Shawshank Redemption"];
     let result = await TMDBApi.startTMDBApi(movies);
     console.log(result);
   }
