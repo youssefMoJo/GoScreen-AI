@@ -11,11 +11,32 @@ class TMDBApi {
     let moviesDetailsWithRatingsAndTrailers = await this.getMoviesTrailers(
       moviesDetailsWithRatings
     );
+
+    let moviesDetailsWithRatingsTrailersAndCast = await this.getMoviesCast(
+      moviesDetailsWithRatingsAndTrailers
+    );
+
+    return moviesDetailsWithRatingsTrailersAndCast;
+  }
+
+  static async getMoviesCast(moviesDetailsWithRatingsAndTrailers) {
+    for (let i = 0; i < moviesDetailsWithRatingsAndTrailers.length; i++) {
+      const url = `${API_URL}movie/${moviesDetailsWithRatingsAndTrailers[i].id}/credits?api_key=${API_KEY}`;
+      moviesDetailsWithRatingsAndTrailers[i]["cast"] = await axios
+        .get(url)
+        .then((res) => {
+          return res.data.cast.splice(0, 5);
+          //   console.log(res.data.cast.splice(0, 5));
+        })
+        .catch((err) => {
+          return err;
+        });
+    }
     return moviesDetailsWithRatingsAndTrailers;
   }
 
   static async getMoviesTrailers(moviesDetailsWithRatings) {
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < moviesDetailsWithRatings.length; i++) {
       const url = `${API_URL}movie/${moviesDetailsWithRatings[i].id}/videos?api_key=${API_KEY}`;
       let youtubeKey = await axios
         .get(url)
