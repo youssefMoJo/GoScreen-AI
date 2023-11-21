@@ -8,6 +8,36 @@ class TMDBApi {
     let moviesIDs = await this.getMoviesIDs(moviesNames);
     let moviesDetails = await this.movieDetails(moviesIDs);
     let moviesDetailsWithRatings = await this.getMoviesRatings(moviesDetails);
+    let moviesDetailsWithRatingsAndTrailers = await this.getMoviesTrailers(
+      moviesDetailsWithRatings
+    );
+    return moviesDetailsWithRatingsAndTrailers;
+  }
+
+  static async getMoviesTrailers(moviesDetailsWithRatings) {
+    for (let i = 0; i < 1; i++) {
+      const url = `${API_URL}movie/${moviesDetailsWithRatings[i].id}/videos?api_key=${API_KEY}`;
+      let youtubeKey = await axios
+        .get(url)
+        .then((res) => {
+          for (let e = 0; e < res.data.results.length; e++) {
+            if (
+              (res.data.results[e].name === "Trailer" ||
+                res.data.results[e].type === "Trailer") &&
+              res.data.results[e].official &&
+              res.data.results[e].site === "YouTube"
+            ) {
+              return res.data.results[e].key;
+            }
+          }
+        })
+        .catch((err) => {
+          return err;
+        });
+
+      moviesDetailsWithRatings[i]["trailer"] = youtubeKey;
+    }
+
     return moviesDetailsWithRatings;
   }
 
