@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import poster from "../assets/poster.jpg";
 import MovieTrailer from "./MovieTrailer";
+import { useSelector } from "react-redux";
 
 const MoviePoster = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const userMovies = useSelector((state) => state.movies.movies);
+  const currentMovie = useSelector((state) => state.currentMovie.currentMovie);
 
   useEffect(() => {
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -36,7 +39,14 @@ const MoviePoster = () => {
 
   return (
     <div style={posterContainerStyle}>
-      <img src={poster} style={moviePosterStyle} alt="Movie Poster" />
+      <img
+        src={
+          `https://image.tmdb.org/t/p/original` +
+          userMovies[currentMovie].poster_path
+        }
+        style={moviePosterStyle}
+        alt="Movie Poster"
+      />
       <MovieTrailer />
     </div>
   );
