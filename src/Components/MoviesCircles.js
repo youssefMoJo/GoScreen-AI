@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import movieImage from "../assets/spider.png";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setCurrentMovie } from "../redux/slices/currentMovie";
 
 const MoviesCircles = () => {
   const [selectedCircle, setSelectedCircle] = useState(null);
   const [animationFinished, setAnimationFinished] = useState(false);
   const userMovies = useSelector((state) => state.movies.movies);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -21,6 +23,7 @@ const MoviesCircles = () => {
     };
 
     animateCircles();
+    dispatch(setCurrentMovie(0));
   }, []);
 
   const moviesCirclesContainerStyle = {
@@ -57,6 +60,7 @@ const MoviesCircles = () => {
 
   const handleCircleClick = (circleNumber) => {
     setSelectedCircle(circleNumber);
+    dispatch(setCurrentMovie(circleNumber));
   };
 
   return (

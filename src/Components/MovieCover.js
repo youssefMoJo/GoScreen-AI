@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import coverImage from "../assets/cover.png";
+import { useSelector } from "react-redux";
 
 const MovieCover = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const userMovies = useSelector((state) => state.movies.movies);
+  const currentMovie = useSelector((state) => state.currentMovie.currentMovie);
 
   useEffect(() => {
     // Simulating a delay for demonstration purposes
@@ -45,7 +48,14 @@ const MovieCover = () => {
 
   return (
     <div style={movieCoverStyle}>
-      <img src={coverImage} style={coverImageStyle} alt="Movie Cover" />
+      <img
+        src={
+          `https://image.tmdb.org/t/p/original` +
+          userMovies[currentMovie].backdrop_path
+        }
+        style={coverImageStyle}
+        alt="Movie Cover"
+      />
       <div style={coverImageBlackLayerStyle}></div>
     </div>
   );

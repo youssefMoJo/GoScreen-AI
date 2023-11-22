@@ -8,12 +8,12 @@ export const currentMovieSlice = createSlice({
   name: "currentMovieReducer",
   initialState,
   reducers: {
-    setCurrentMovies: (state, action) => {
+    setCurrentMovie: (state, action) => {
       state.currentMovie = action.payload;
     },
   },
 });
 
-export const { setCurrentMovies } = currentMovieSlice.actions;
+export const { setCurrentMovie } = currentMovieSlice.actions;
 
 export default currentMovieSlice.reducer;
