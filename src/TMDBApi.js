@@ -6,6 +6,7 @@ const API_KEY = "29de87d3f58e703ce82ba34e2460edcd";
 class TMDBApi {
   static async startTMDBApi(moviesNames) {
     let moviesIDs = await this.getMoviesIDs(moviesNames);
+    moviesIDs = this.removeUndefinedFromArray(moviesIDs);
     let moviesDetails = await this.movieDetails(moviesIDs);
     let moviesDetailsWithRatings = await this.getMoviesRatings(moviesDetails);
     let moviesDetailsWithRatingsAndTrailers = await this.getMoviesTrailers(
@@ -17,6 +18,10 @@ class TMDBApi {
     );
 
     return moviesDetailsWithRatingsTrailersAndCast;
+  }
+
+  static removeUndefinedFromArray(arr) {
+    return arr.filter((item) => item !== undefined);
   }
 
   static async getMoviesCast(moviesDetailsWithRatingsAndTrailers) {
@@ -44,7 +49,6 @@ class TMDBApi {
             if (
               (res.data.results[e].name === "Trailer" ||
                 res.data.results[e].type === "Trailer") &&
-              res.data.results[e].official &&
               res.data.results[e].site === "YouTube"
             ) {
               return res.data.results[e].key;
