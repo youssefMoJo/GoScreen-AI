@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import imdbIcon from "../assets/imdb.png";
 import rottenTomatoesIcon from "../assets/rottenTomatoes.png";
+import { useSelector } from "react-redux";
 
 const MovieInfo = () => {
   const [animationFinished, setAnimationFinished] = useState(false);
+  const userMovies = useSelector((state) => state.movies.movies);
+  const currentMovie = useSelector((state) => state.currentMovie.currentMovie);
 
   useEffect(() => {
     // Delay the animation by 1000 milliseconds (1 second)
@@ -81,7 +84,7 @@ const MovieInfo = () => {
 
   return (
     <div style={movieInfoStyle}>
-      <h2 style={movieNameStyle}>Spider-Man: Across the Spider-Verse</h2>
+      <h2 style={movieNameStyle}>{userMovies[currentMovie].original_title}</h2>
       <div style={timeGenraDateStyle}>
         2h 30min / adventure, Drama / 2023-09-20
       </div>
