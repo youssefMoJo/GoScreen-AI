@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import movieImage from "../assets/spider.png";
+import { useSelector } from "react-redux";
 
 const MoviesCircles = () => {
   const [selectedCircle, setSelectedCircle] = useState(null);
   const [animationFinished, setAnimationFinished] = useState(false);
+  const userMovies = useSelector((state) => state.movies.movies);
 
   useEffect(() => {
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -14,7 +16,7 @@ const MoviesCircles = () => {
         await delay(500);
       }
 
-      setSelectedCircle(1);
+      setSelectedCircle(0);
       setAnimationFinished(true);
     };
 
@@ -59,18 +61,18 @@ const MoviesCircles = () => {
 
   return (
     <div style={moviesCirclesContainerStyle}>
-      {[1, 2, 3, 4, 5, 6].map((circleNumber, index) => (
+      {userMovies.map((eachMovie, index) => (
         <div
-          key={circleNumber}
+          key={index}
           style={{
-            ...movieCircleStyle(circleNumber),
+            ...movieCircleStyle(index),
             transitionDelay: `${index * 0.1}s`,
           }}
-          onClick={() => handleCircleClick(circleNumber)}
+          onClick={() => handleCircleClick(index)}
         >
           <img
-            src={movieImage}
-            alt={`Movie ${circleNumber}`}
+            src={`https://image.tmdb.org/t/p/original` + eachMovie.poster_path}
+            alt={`Movie ${index}`}
             style={movieImageStyle}
           />
         </div>

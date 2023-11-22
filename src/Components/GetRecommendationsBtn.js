@@ -22,11 +22,11 @@ const GetRecommendationsBtn = () => {
   };
   let isButtonDisabled = !(userPreference === "Movies" && userInput.length > 0);
 
-  async function startTMDBApi() {
-    let movies = ["The Shawshank Redemption", "The Godfather", "Inception"];
-    let result = await TMDBApi.startTMDBApi(movies);
-    console.log(result);
-  }
+  // async function startTMDBApi() {
+  //   let movies = ["The Shawshank Redemption", "The Godfather", "Inception"];
+  //   let result = await TMDBApi.startTMDBApi(movies);
+  //   console.log(result);
+  // }
 
   const handleConfirmation = async () => {
     dispatch(setGetRecommendationsStatus(true));
