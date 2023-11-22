@@ -82,37 +82,54 @@ const MovieInfo = () => {
     paddingRight: "15px",
   };
 
+  function convertRuntimeToHoursAndMinutes(runtimeInMinutes) {
+    const hours = Math.floor(runtimeInMinutes / 60);
+    const minutes = runtimeInMinutes % 60;
+    return `${hours}h ${minutes}min`;
+  }
+
   return (
     <div style={movieInfoStyle}>
       <h2 style={movieNameStyle}>{userMovies[currentMovie].original_title}</h2>
       <div style={timeGenraDateStyle}>
-        2h 30min / adventure, Drama / 2023-09-20
+        {convertRuntimeToHoursAndMinutes(userMovies[currentMovie].runtime)} / {userMovies[currentMovie].genres.map((eachGenre, i)=>{
+            if(i < userMovies[currentMovie].genres.length - 1){
+              return eachGenre.name + ", "
+            }  else{
+              return eachGenre.name + " "
+            }
+        })} / {userMovies[currentMovie].release_date}
       </div>
 
       <div style={ratingsContainerStyle}>
         <div style={RatingContainerStyle}>
           <img style={IMDBIconStyle} src={imdbIcon} alt="IMDB Icon" />
-          <span style={IMDBRatingStyle}>7/10</span>
+          <span style={IMDBRatingStyle}> {userMovies[currentMovie].ratings.imdb}/10</span>
         </div>
 
-        <div style={RatingContainerStyle}>
+        {/* <div style={RatingContainerStyle}>
           <img
             style={rottenTomatoesIconStyle}
             src={rottenTomatoesIcon}
             alt="rottenTomatoes Icon"
           />
           <span style={IMDBRatingStyle}>97%</span>
-        </div>
+        </div> */}
       </div>
+      {/* Cast: Jason Statham, 50 Cent, Megan Fox, Dolph Lundgren, Iko Uwais... */}
 
       <div style={castStyle}>
-        Cast: Jason Statham, 50 Cent, Megan Fox, Dolph Lundgren, Iko Uwais...
+        Cast: {userMovies[currentMovie].cast.map((eachMember, i)=> {
+          if(i < userMovies[currentMovie].cast.length - 1){
+            return eachMember.name + ", "
+          }else{
+            return eachMember.name + "...."
+          }
+        })}
       </div>
 
       <div style={descriptionStyle}>
-        Armed with every weapon they can get their hands on and the skills to
-        use them, The Expendables are the world’s last line of defense and the
-        team that gets called when all other options are off the table. But new
+        {userMovies[currentMovie].overview}
       </div>
     </div>
   );

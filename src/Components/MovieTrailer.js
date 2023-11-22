@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Lottie from "lottie-react";
 import youtube from "../assets/youtube.json";
+import { useSelector } from "react-redux";
 
 const MovieTrailer = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [isRendered, setIsRendered] = useState(false);
+  const userMovies = useSelector((state) => state.movies.movies);
+  const currentMovie = useSelector((state) => state.currentMovie.currentMovie);
 
   useEffect(() => {
     const delay = setTimeout(() => {
@@ -41,7 +44,7 @@ const MovieTrailer = () => {
 
   return (
     <a
-      href="https://your-trailer-link.com"
+      href= {`https://www.youtube.com/watch?v=${userMovies[currentMovie].trailer}`}
       target="_blank"
       rel="noopener noreferrer"
       style={{ ...movieTrailerStyle, ...(isHovered && onHoverStyle) }}
