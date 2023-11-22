@@ -12,6 +12,8 @@ const MovieCover = () => {
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     const animateCover = async () => {
+      setIsLoaded(false);
+
       await delay(400); // Adjust the delay as needed
 
       // Set the isLoaded state to trigger the transition
@@ -19,7 +21,7 @@ const MovieCover = () => {
     };
 
     animateCover();
-  }, []);
+  }, [currentMovie]);
 
   const movieCoverStyle = {
     position: "relative",
@@ -49,10 +51,11 @@ const MovieCover = () => {
   return (
     <div style={movieCoverStyle}>
       <img
-        src={
-          `https://image.tmdb.org/t/p/original` +
-          userMovies[currentMovie].backdrop_path
-        }
+        // src={
+        //   `https://image.tmdb.org/t/p/original` +
+        //   userMovies[currentMovie].backdrop_path
+        // }
+        src={`https://image.tmdb.org/t/p/original${userMovies[currentMovie].backdrop_path}`}
         style={coverImageStyle}
         alt="Movie Cover"
       />
