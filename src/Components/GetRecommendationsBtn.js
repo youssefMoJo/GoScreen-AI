@@ -11,6 +11,8 @@ const GetRecommendationsBtn = () => {
     (state) => state.userPreference.preference
   );
 
+  const userMovies = useSelector((state) => state.movies.movies);
+
   const userInput = useSelector((state) => state.userInput.userInput);
   const recommendationsStatus = useSelector(
     (state) => state.getRecommendationsStatus.getRecommendationsStatus
@@ -24,12 +26,23 @@ const GetRecommendationsBtn = () => {
   let isButtonDisabled = !(userPreference === "Movies" && userInput.length > 0);
 
   const askChatGPT = async (userInput) => {
+    let moviesNames = [];
+    for (let i = 0; i < userMovies.length; i++) {
+      moviesNames.push(userMovies[i].original_title);
+    }
+
+    let content =
+      userMovies.length === 0
+        ? `${userInput} give me 10 names of good movies that have what i want. and return them in a JSON object under the "movies" key. Just return the JSON, just the names of the movies in a JSON object under the "movies" key`
+        : `${userInput} give me 10 names of good movies that have what i want. and return them in a JSON object under the "movies" key, just the names of the movies in a JSON object under the "movies" key. Just return the JSON. try to get new movies other than these ${moviesNames}`;
+    console.log("userMovies:", userMovies);
+
     const options = {
       method: "POST",
       url: "https://chatgpt-api8.p.rapidapi.com/",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "10e50224a5msh13c90e024fccde6p1f6d08jsn7a08f5bd9293",
+        "X-RapidAPI-Key": "4402431e98mshc28c91a8db7a4d2p121317jsn573d39e2cbf7",
         "X-RapidAPI-Host": "chatgpt-api8.p.rapidapi.com",
       },
       data: [
@@ -39,7 +52,7 @@ const GetRecommendationsBtn = () => {
           role: "system",
         },
         {
-          content: `${userInput} give me 10 names of good movies that have what i want. and return them in a JSON object under the "movies" key. Just return the JSON`,
+          content: content,
           role: "user",
         },
       ],
@@ -57,8 +70,8 @@ const GetRecommendationsBtn = () => {
   const handleConfirmation = async () => {
     dispatch(setGetRecommendationsStatus(true));
     dispatch(setIsConfirmationLoadingFinished(false));
-    let movies = await askChatGPT(userInput);
-    console.log(movies);
+    let chatGPTMovies = await askChatGPT(userInput);
+    console.log("chatGPTMovies: ", chatGPTMovies);
     // let movies = [
     //   "Mad Max: Fury Road",
     //   "The Road",
@@ -71,10 +84,10 @@ const GetRecommendationsBtn = () => {
     //   "The Hunger Games",
     //   "World War Z",
     // ];
-    let allMovies = await TMDBApi.startTMDBApi(movies);
-    dispatch(setMovies(allMovies));
+    let allMoviesFromTMDB = await TMDBApi.startTMDBApi(chatGPTMovies);
+    dispatch(setMovies(allMoviesFromTMDB));
 
-    if (allMovies) {
+    if (allMoviesFromTMDB) {
       dispatch(setGetRecommendationsStatus(false));
       dispatch(setIsConfirmationLoadingFinished(true));
     }
