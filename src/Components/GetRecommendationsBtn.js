@@ -70,26 +70,23 @@ const GetRecommendationsBtn = () => {
   const handleConfirmation = async () => {
     dispatch(setGetRecommendationsStatus(true));
     dispatch(setIsConfirmationLoadingFinished(false));
-    let chatGPTMovies = await askChatGPT(userInput);
-    console.log("chatGPTMovies: ", chatGPTMovies);
-    // let movies = [
-    //   "Mad Max: Fury Road",
-    //   "The Road",
-    //   "Children of Men",
-    //   "The Book of Eli",
-    //   "28 Days Later",
-    //   "I Am Legend",
-    //   "Snowpiercer",
-    //   "The Maze Runner",
-    //   "The Hunger Games",
-    //   "World War Z",
-    // ];
-    let allMoviesFromTMDB = await TMDBApi.startTMDBApi(chatGPTMovies);
-    dispatch(setMovies(allMoviesFromTMDB));
+    try {
+      let chatGPTMovies = await askChatGPT(userInput);
+      console.log("chatGPTMovies: ", chatGPTMovies);
+      // let chatGPTMovies = ["Mad Max: Fury Road", "The Road"];
+      let allMoviesFromTMDB = await TMDBApi.startTMDBApi(chatGPTMovies);
+      dispatch(setMovies(allMoviesFromTMDB));
 
-    if (allMoviesFromTMDB) {
+      if (allMoviesFromTMDB) {
+        dispatch(setGetRecommendationsStatus(false));
+        dispatch(setIsConfirmationLoadingFinished(true));
+      }
+    } catch (err) {
+      alert(
+        "Invalid input. Please try again with a different input or use one of the predefined examples."
+      );
       dispatch(setGetRecommendationsStatus(false));
-      dispatch(setIsConfirmationLoadingFinished(true));
+      console.log(err);
     }
 
     // setTimeout(() => {
