@@ -5,8 +5,11 @@ import { setIsConfirmationLoadingFinished } from "../redux/slices/confirmationLo
 import TMDBApi from "../TMDBApi";
 import { setMovies } from "../redux/slices/movies";
 import axios from "axios";
+import React, { useState } from "react";
 
 const GetRecommendationsBtn = () => {
+  const [error, setError] = useState("");
+
   const userPreference = useSelector(
     (state) => state.userPreference.preference
   );
@@ -35,14 +38,13 @@ const GetRecommendationsBtn = () => {
       userMovies.length === 0
         ? `${userInput} give me 10 names of good movies that have what i want. and return them in a JSON object under the "movies" key. Just return the JSON, just the names of the movies in a JSON object under the "movies" key`
         : `${userInput} give me 10 names of good movies that have what i want. and return them in a JSON object under the "movies" key, just the names of the movies in a JSON object under the "movies" key. Just return the JSON. try to get new movies other than these ${moviesNames}`;
-    console.log("userMovies:", userMovies);
 
     const options = {
       method: "POST",
       url: "https://chatgpt-api8.p.rapidapi.com/",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "4402431e98mshc28c91a8db7a4d2p121317jsn573d39e2cbf7",
+        "X-RapidAPI-Key": "d8893258fcmsh1c496172c125884p1125fbjsn61bc7f42d577",
         "X-RapidAPI-Host": "chatgpt-api8.p.rapidapi.com",
       },
       data: [
@@ -62,17 +64,19 @@ const GetRecommendationsBtn = () => {
       const response = await axios.request(options);
       const movies = JSON.parse(response.data.text);
       return movies.movies;
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.log("from chatGPT func: ", err.response);
     }
   };
 
   const handleConfirmation = async () => {
     dispatch(setGetRecommendationsStatus(true));
     dispatch(setIsConfirmationLoadingFinished(false));
+
     try {
       let chatGPTMovies = await askChatGPT(userInput);
       console.log("chatGPTMovies: ", chatGPTMovies);
+
       // let chatGPTMovies = ["Mad Max: Fury Road", "The Road"];
       let allMoviesFromTMDB = await TMDBApi.startTMDBApi(chatGPTMovies);
       dispatch(setMovies(allMoviesFromTMDB));
@@ -80,13 +84,13 @@ const GetRecommendationsBtn = () => {
       if (allMoviesFromTMDB) {
         dispatch(setGetRecommendationsStatus(false));
         dispatch(setIsConfirmationLoadingFinished(true));
+        setError("");
       }
     } catch (err) {
-      alert(
-        "Invalid input. Please try again with a different input or use one of the predefined examples."
-      );
       dispatch(setGetRecommendationsStatus(false));
-      console.log(err);
+      setError(
+        "Unable to process your request at the moment. Please try again with a different input or use a predefined example. Alternatively, try again later."
+      );
     }
 
     // setTimeout(() => {
@@ -106,6 +110,9 @@ const GetRecommendationsBtn = () => {
       >
         Get Recommendations
       </a>
+      {error ? (
+        <div style={{ color: "red", paddingTop: "10px" }}>{error}</div>
+      ) : null}
     </div>
   );
 };
