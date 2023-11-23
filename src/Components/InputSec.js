@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Lottie from "lottie-react";
 import aiAnimation from "../assets/AI.json";
@@ -6,6 +6,7 @@ import { setUserInput } from "../redux/slices/userInputSlice";
 import robotScaningBrain from "../assets/robotScaningBrain1.json";
 import bgBehindScaning from "../assets/bgBehindScaning.json";
 import comingSoon from "../assets/comingSoon1.json";
+import Example from "./Example";
 
 const InputSec = () => {
   const [animationStarted, setAnimationStarted] = useState(false);
@@ -118,6 +119,33 @@ const InputSec = () => {
     transition: "opacity 0.4s ease-in-out, transform 0.4s ease-in-out",
   };
 
+  const examplesStyle = {
+    width: "13%",
+    position: "absolute",
+    // marginRight: "-5%",
+    right:
+      userPreference !== "Tv Shows" &&
+      userPreference === "Movies" &&
+      !recommendationsStatus
+        ? "17%"
+        : "45%",
+    opacity:
+      userPreference !== "Tv Shows" &&
+      userPreference === "Movies" &&
+      !recommendationsStatus
+        ? 1
+        : 0,
+    transform: `scale(${
+      userPreference !== "Tv Shows" &&
+      userPreference === "Movies" &&
+      !recommendationsStatus
+        ? 1
+        : 0
+    })`,
+    transition:
+      "opacity 0.2s ease-in-out, transform 0.2s ease-in-out, right 0.3s ease-in-out",
+  };
+
   return (
     <div style={inputSectionContainerStyle}>
       <div style={aiAnimationStyle}>
@@ -143,6 +171,11 @@ const InputSec = () => {
           recommendationsStatus || userPreference === "Tv Shows" ? true : false
         }
       ></textarea>
+
+      <div style={examplesStyle}>
+        <Example />
+      </div>
+
       <Lottie
         style={comingSoonStyle}
         loop={userPreference === "Tv Shows" ? false : true}
