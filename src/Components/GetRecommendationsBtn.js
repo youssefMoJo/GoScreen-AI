@@ -44,7 +44,7 @@ const GetRecommendationsBtn = () => {
       url: "https://chatgpt-api8.p.rapidapi.com/",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "d8893258fcmsh1c496172c125884p1125fbjsn61bc7f42d577",
+        "X-RapidAPI-Key": "42b784d278msh9968340461abba7p11162bjsn1e9e2aa283f5",
         "X-RapidAPI-Host": "chatgpt-api8.p.rapidapi.com",
       },
       data: [
