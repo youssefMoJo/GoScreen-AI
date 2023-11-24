@@ -5,14 +5,30 @@ import { setIsConfirmationLoadingFinished } from "../redux/slices/confirmationLo
 import TMDBApi from "../TMDBApi";
 import { setMovies } from "../redux/slices/movies";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const GetRecommendationsBtn = () => {
   const [error, setError] = useState("");
+  const [RapidAPIKey, setRapidAPIKey] = useState(null);
+
+  const RapidAPIKeys = [
+    "42b784d278msh9968340461abba7p11162bjsn1e9e2aa283f5", //67
+    "b18129b7eamsh49823c12ed46d8fp15fdbajsnb83dd341a2b2", // 848
+    "b81f2cbc1amsh75d040f81ce647fp1fa4e1jsn6b50598596df", // yrs
+    "10e50224a5msh13c90e024fccde6p1f6d08jsn7a08f5bd9293", //sparkledrive
+    "9d08ec770bmshe7c36e50e9a135ep10438cjsn8899f23a2335", //workwithyoussef
+    "4402431e98mshc28c91a8db7a4d2p121317jsn573d39e2cbf7", //yekola
+  ];
 
   const userPreference = useSelector(
     (state) => state.userPreference.preference
   );
+
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * RapidAPIKeys.length);
+    const randomKey = RapidAPIKeys[randomIndex];
+    setRapidAPIKey(randomKey);
+  }, []);
 
   const userMovies = useSelector((state) => state.movies.movies);
 
@@ -44,7 +60,7 @@ const GetRecommendationsBtn = () => {
       url: "https://chatgpt-api8.p.rapidapi.com/",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "42b784d278msh9968340461abba7p11162bjsn1e9e2aa283f5",
+        "X-RapidAPI-Key": `${RapidAPIKey}`,
         "X-RapidAPI-Host": "chatgpt-api8.p.rapidapi.com",
       },
       data: [
@@ -91,6 +107,13 @@ const GetRecommendationsBtn = () => {
       setError(
         "Unable to process your request at the moment. Please try again with a different input or use a predefined example. Alternatively, try again later."
       );
+      let randomIndex = Math.floor(Math.random() * RapidAPIKeys.length);
+      let randomKey = RapidAPIKeys[randomIndex];
+      while (randomKey === RapidAPIKey) {
+        randomIndex = Math.floor(Math.random() * RapidAPIKeys.length);
+        randomKey = RapidAPIKeys[randomIndex];
+      }
+      setRapidAPIKey(randomKey);
     }
 
     // setTimeout(() => {
