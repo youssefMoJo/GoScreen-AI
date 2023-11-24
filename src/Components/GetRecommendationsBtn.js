@@ -52,15 +52,15 @@ const GetRecommendationsBtn = () => {
 
     let content =
       userMovies.length === 0
-        ? `${userInput} give me 10 names of good movies that have what i want. and return them in a JSON object under the "movies" key. Just return the JSON, just the names of the movies in a JSON object under the "movies" key`
-        : `${userInput} give me 10 names of good movies that have what i want. and return them in a JSON object under the "movies" key, just the names of the movies in a JSON object under the "movies" key. Just return the JSON. try to get new movies other than these ${moviesNames}`;
+        ? `here is the user input: ${userInput}.  Provide me with a list of 10 excellent movies that match my criteria. Return them in a JSON object under the 'movies' key. The JSON should consist of an array of movie names, each represented as a string 'movie name'. do not number the movies just each element in the movie names array is "movie name" `
+        : `here is the user input: ${userInput}.  Provide me with a list of 10 excellent movies that match my criteria. Return them in a JSON object under the 'movies' key. The JSON should consist of an array of movie names, each represented as a string 'movie name'. do not number the movies just each element in the movie names array is "movie name". try to get new movies other than these ${moviesNames}`;
 
     const options = {
       method: "POST",
       url: "https://chatgpt-api8.p.rapidapi.com/",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": `${RapidAPIKey}`,
+        "X-RapidAPI-Key": `42b784d278msh9968340461abba7p11162bjsn1e9e2aa283f5`,
         "X-RapidAPI-Host": "chatgpt-api8.p.rapidapi.com",
       },
       data: [
@@ -78,12 +78,58 @@ const GetRecommendationsBtn = () => {
 
     try {
       const response = await axios.request(options);
-      const movies = JSON.parse(response.data.text);
-      return movies.movies;
+      const responseString = `Certainly! Here are 10 romantic movies that fit your criteria:
+
+        {
+          "movies": [
+            "1. The Holiday",
+            "2. About Time",
+            "3. Before Sunrise",
+            "4. Amélie",
+            "5. Silver Linings Playbook",
+            "6. Crazy, Stupid, Love",
+            "7. The Proposal",
+            "8. La La Land",
+            "9. The Princess Bride",
+            "10. Love Actually"
+          ]
+        } 
+        I hope you find these movies enjoyable! Let me know if there's anything else I can assist you with.`;
+      console.log(response);
+      console.log(extractMovies(response.data.text));
+
+      // const movies = JSON.parse(response.data.text);
+      return extractMovies(response.data.text);
     } catch (err) {
-      console.log("from chatGPT func: ", err.response);
+      console.log("from chatGPT func: ", err);
     }
   };
+
+  function extractMovies(response) {
+    try {
+      // Extract the JSON object from the response string
+      const jsonString = response.match(/{[^]*}/);
+
+      // Check if a valid JSON string is found
+      if (jsonString) {
+        const responseObject = JSON.parse(jsonString[0]);
+
+        // Check if the 'movies' array exists in the response object
+        if (responseObject && responseObject.movies) {
+          return responseObject.movies;
+        } else {
+          console.error("Movies array not found in the response.");
+          return null;
+        }
+      } else {
+        console.error("No valid JSON object found in the response.");
+        return null;
+      }
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      return null;
+    }
+  }
 
   const handleConfirmation = async () => {
     dispatch(setGetRecommendationsStatus(true));
