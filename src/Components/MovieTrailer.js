@@ -29,7 +29,7 @@ const MovieTrailer = () => {
     justifyContent: "center",
     transition: "background-color 0.3s, transform 0.2s",
     width: "88%",
-    height: "13%",
+    // height: "13%",
     transform: isRendered ? "scale(1)" : "scale(0)",
   };
 
