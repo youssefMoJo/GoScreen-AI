@@ -24,7 +24,7 @@ const MovieInfo = () => {
   const movieInfoStyle = {
     // backgroundColor: "green",
     width: "60%",
-    marginTop: "-6rem",
+    marginTop: "-11rem",
     zIndex: "1",
     opacity: animationFinished ? 1 : 0,
     transform: animationFinished
@@ -76,7 +76,7 @@ const MovieInfo = () => {
 
   const descriptionStyle = {
     fontSize: "18px",
-    height: "200px",
+    height: "auto",
     overflowY: "auto",
     color: "white",
     paddingRight: "15px",
